@@ -4,6 +4,8 @@ Extension for [nvim-projector](https://github.com/kndndrj/nvim-projector) that a
 - tasks.json
 - launch.json
 
+NOTE: Only basic functionality for now.
+
 ## tasks.json
   - module: `tasksjson`
   - opt:  `string`
