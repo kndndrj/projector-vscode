@@ -1,6 +1,6 @@
-local Task = require 'projector.task'
-local Loader = require 'projector.contract.loader'
-local common = require 'projector.loaders.common'
+local Task = require("projector.task")
+local Loader = require("projector.contract.loader")
+local common = require("projector.loaders.common")
 
 ---@type Loader
 local LaunchJsonLoader = Loader:new("legacy.json")
@@ -8,7 +8,7 @@ local LaunchJsonLoader = Loader:new("legacy.json")
 ---@param opt string Path to legacy projector.json
 ---@return Task[]|nil
 function LaunchJsonLoader:load(opt)
-  local path = opt or (vim.fn.getcwd() .. '/.vscode/launch.json')
+  local path = opt or (vim.fn.getcwd() .. "/.vscode/launch.json")
   if type(path) ~= "string" then
     print("LaunchJsonLoader error: got " .. type(path) .. ", want string")
     return
@@ -20,15 +20,19 @@ function LaunchJsonLoader:load(opt)
 
   local lines = {}
   for line in io.lines(path) do
-    if not vim.startswith(vim.trim(line), '//') then
+    if not vim.startswith(vim.trim(line), "//") then
       table.insert(lines, line)
     end
   end
 
-  local contents = table.concat(lines, '\n')
+  local contents = table.concat(lines, "\n")
   local ok, data = pcall(vim.fn.json_decode, contents)
   if not ok then
-    vim.notify('[launch.json Loader] Error parsing json file: "' .. path .. '"', vim.log.levels.ERROR, { title = 'nvim-projector' })
+    vim.notify(
+      '[launch.json Loader] Error parsing json file: "' .. path .. '"',
+      vim.log.levels.ERROR,
+      { title = "nvim-projector" }
+    )
     return
   end
 
