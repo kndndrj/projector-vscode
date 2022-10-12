@@ -1,6 +1,7 @@
 local Task = require("projector.task")
 local Loader = require("projector.contract.loader")
 local common = require("projector.loaders.common")
+local utils = require("projector.utils")
 
 ---@type Loader
 local TasksJsonLoader = Loader:new("legacy.json")
@@ -10,7 +11,7 @@ local TasksJsonLoader = Loader:new("legacy.json")
 function TasksJsonLoader:load(opt)
   local path = opt or (vim.fn.getcwd() .. "/.vscode/tasks.json")
   if type(path) ~= "string" then
-    print("TasksJsonLoader error: got " .. type(path) .. ", want string")
+    utils.log("error", 'Got: "' .. type(path) .. '", want "string".', "tasks.json Loader")
     return
   end
 
@@ -28,11 +29,7 @@ function TasksJsonLoader:load(opt)
   local contents = table.concat(lines, "\n")
   local ok, data = pcall(vim.fn.json_decode, contents)
   if not ok then
-    vim.notify(
-      '[tasks.json Loader] Error parsing json file: "' .. path .. '"',
-      vim.log.levels.ERROR,
-      { title = "nvim-projector" }
-    )
+    utils.log("error", 'Could not parse json file: "' .. path .. '".', "tasks.json Loader")
     return
   end
 
