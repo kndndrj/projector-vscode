@@ -6,10 +6,12 @@ local utils = require("projector.utils")
 ---@type Loader
 local LaunchJsonLoader = Loader:new("legacy.json")
 
----@param opt string Path to legacy projector.json
 ---@return Task[]|nil
-function LaunchJsonLoader:load(opt)
-  local path = opt or (vim.fn.getcwd() .. "/.vscode/launch.json")
+function LaunchJsonLoader:load()
+  ---@type { path: string }
+  local opts = self.user_opts
+
+  local path = opts.path or (vim.fn.getcwd() .. "/.vscode/launch.json")
   if type(path) ~= "string" then
     utils.log("error", 'Got: "' .. type(path) .. '", want "string".', "launch.json Loader")
     return

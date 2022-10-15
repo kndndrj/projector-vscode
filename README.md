@@ -11,13 +11,13 @@ NOTE: Only basic functionality for now.
 ## tasks.json
 
 - module: `tasksjson`
-- opt: `string`
-  - `string`: path to `tasks.json` - default: `./.vscode/tasks.json`
+- options:
+  - `path` - *string*: path to `tasks.json` - default: `./.vscode/tasks.json`
 - variable expansion: VsCode like variables (e.g. `${file}`)
 
 ## launch.json
 
 - module: `launchjson`
-- opt: `string`
-  - `string`: path to `launch.json` - default: `./.vscode/launch.json`
+- options:
+  - `path` - *string*: path to `launch.json` - default: `./.vscode/launch.json`
 - variable expansion: VsCode like variables (e.g. `${file}`)
