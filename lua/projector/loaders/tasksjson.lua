@@ -4,7 +4,7 @@ local common = require("projector.loaders.common")
 local utils = require("projector.utils")
 
 ---@type Loader
-local TasksJsonLoader = Loader:new("legacy.json")
+local TasksJsonLoader = Loader:new()
 
 ---@return Task[]|nil
 function TasksJsonLoader:load()
