@@ -22,7 +22,7 @@ function LaunchJsonLoader:new(opts)
 
   local o = {
     get_path = path_getter or function()
-      return ""
+      return vim.fn.getcwd() .. "/.vscode/launch.json"
     end,
   }
   setmetatable(o, self)
@@ -73,7 +73,6 @@ function LaunchJsonLoader:load()
     return config
   end
 
-  -- map with Task objects
   ---@type task_configuration[]
   local configs = {}
 

@@ -22,7 +22,7 @@ function TasksJsonLoader:new(opts)
 
   local o = {
     get_path = path_getter or function()
-      return ""
+      return vim.fn.getcwd() .. "/.vscode/tasks.json"
     end,
   }
   setmetatable(o, self)
@@ -35,7 +35,7 @@ function TasksJsonLoader:name()
   return "tasks.json"
 end
 
----@return Task[]|nil
+---@return task_configuration[]?
 function TasksJsonLoader:load()
   if not vim.loop.fs_stat(self.get_path()) then
     return
@@ -83,7 +83,6 @@ function TasksJsonLoader:load()
     return config
   end
 
-  -- map with Task objects
   local tasks = {}
 
   if data.command then
