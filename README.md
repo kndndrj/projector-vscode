@@ -1,23 +1,22 @@
 # Neovim Projector VSCode Loader
 
 Extension for [nvim-projector](https://github.com/kndndrj/nvim-projector) that
-adds 2 additional loaders for:
-
-- tasks.json
-- launch.json
+adds 2 additional loaders for `tasks.json` and `launch.json` files.
 
 NOTE: Only basic functionality for now.
 
-## tasks.json
+## Installation
 
-- module: `tasksjson`
-- options:
-  - `path` - *string*: path to `tasks.json` - default: `./.vscode/tasks.json`
-- variable expansion: VsCode like variables (e.g. `${file}`)
+Install it as any other plugin. and add the loaders to `projector`'s setup
+function:
 
-## launch.json
-
-- module: `launchjson`
-- options:
-  - `path` - *string*: path to `launch.json` - default: `./.vscode/launch.json`
-- variable expansion: VsCode like variables (e.g. `${file}`)
+```lua
+require("projector").setup {
+  loaders = {
+    require("projector_vscode").LaunchJsonLoader:new(),
+    require("projector_vscode").TasksJsonLoader:new(),
+    -- ... your other loaders
+  },
+  -- ... the rest of your config
+}
+```
